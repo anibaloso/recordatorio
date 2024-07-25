@@ -66,6 +66,15 @@ document.getElementById("Jugar").addEventListener("click", () => {
     tipo = iconosActividades.Jugar
 })
 
+//cargamos la pagina y se recupera las actividades del localstorage
+
+document.addEventListener("DOMContentLoaded",()=>{
+    const savedActividades=localStorage.getItem("actividades");
+    if(savedActividades){
+        actividades=JSON.parse(savedActividades);
+        crearActividad(actividades);
+    }
+})
 
 
 //al apretar boton agregar nueva actividad
@@ -81,6 +90,8 @@ document.getElementById("agregarActividad").addEventListener('click', () => {
     actividad.icono = tipo
 
     actividades.push(actividad)
+    // Actualizar el localStorage
+    guardarLS();
     crearActividad(actividades)
 })
 
@@ -111,8 +122,16 @@ document.getElementById("body").addEventListener('click', (event) => {
             // Eliminar la actividad del arreglo
             actividades.splice(numIndex, 1);
 
+            // Actualizar el localStorage
+            guardarLS();
+
             // Volver a crear la tabla con las actividades actualizadas
             crearActividad(actividades);
         }
     }
 });
+
+
+function guardarLS(){
+    localStorage.setItem("actividades",JSON.stringify(actividades));
+}
