@@ -4,6 +4,15 @@ const dropdownList = [...dropdownElementList].map(dropdownToggleEl => new bootst
 const myModal = document.getElementById('myModal')
 const myInput = document.getElementById('myInput')
 
+
+$(document).ready(function () {
+    $('.dropdown-item').on('click', function () {
+        var selectedText = $(this).text();
+        $('#dropdownMenuButton').text(selectedText);
+    });
+});
+
+
 myModal.addEventListener('shown.bs.modal', () => {
     // myInput.focus()
 })
@@ -68,10 +77,10 @@ document.getElementById("Jugar").addEventListener("click", () => {
 
 //cargamos la pagina y se recupera las actividades del localstorage
 
-document.addEventListener("DOMContentLoaded",()=>{
-    const savedActividades=localStorage.getItem("actividades");
-    if(savedActividades){
-        actividades=JSON.parse(savedActividades);
+document.addEventListener("DOMContentLoaded", () => {
+    const savedActividades = localStorage.getItem("actividades");
+    if (savedActividades) {
+        actividades = JSON.parse(savedActividades);
         crearActividad(actividades);
     }
 })
@@ -132,6 +141,6 @@ document.getElementById("body").addEventListener('click', (event) => {
 });
 
 
-function guardarLS(){
-    localStorage.setItem("actividades",JSON.stringify(actividades));
+function guardarLS() {
+    localStorage.setItem("actividades", JSON.stringify(actividades));
 }
