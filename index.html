@@ -13,17 +13,28 @@
 </head>
 
 <body>
-    <div class="container mt-5">
+    <div class="container mt-2">
         <div class="row">
-            <div class="col text-center">
+            <div class="col d-flex justify-content-start ">
+                <div class="row">
+                    <div class="col-12" id="ciudad"></div>
+                    <div class="col-12" id="clima"></div>
+                </div>
+            </div>
+            <div class="col d-flex justify-content-center align-items-center" id="reloj">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center mt-2">
                 <h1>Tareas</h1>
             </div>
+
         </div>
     </div>
 
     <div class="container">
         <div class="row">
-            <div class="col-12 mt-5">
+            <div class="col-12 mt-2 text-center">
                 <button type="button" class="btn btn-outline-success " id="agregar" data-bs-toggle="modal"
                     data-bs-target="#myModal">Agregar Actividad</button>
             </div>
@@ -31,6 +42,7 @@
                 <table class="table border">
                     <thead>
                         <tr>
+                            <th scope="col">Fecha</th>
                             <th scope="col">Hora</th>
                             <th scope="col">Actividad</th>
                             <th scope="col">Tipo</th>
@@ -56,6 +68,14 @@
                 <div class="modal-body">
                     <div class="row mt-2">
                         <div class="col-5 mt-2">
+                            <label for="actividad">Fecha</label>
+                        </div>
+                        <div class="col-4 mt-2">
+                            <input class="rounded" type="date" id="fecha" value="">
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-5 mt-2">
                             <label for="actividad">Hora</label>
                         </div>
                         <div class="col-4 mt-2">
@@ -69,20 +89,29 @@
                         <div class="col-4 mt-2">
                             <div class="dropdown">
                                 <button class="btn btn-outline-success dropdown-toggle" type="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false"id="dropdownMenuButton">
+                                    data-bs-toggle="dropdown" aria-expanded="false" id="dropdownMenuButton">
                                     Selecciona
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-dark" id="#dropdownMenuButton">
-                                    <li><a class="dropdown-item" id="Ejercicio"><i class="fa-solid fa-person-swimming"></i> Ejercicio</a></li>
-                                    <li><a class="dropdown-item" id="Bañarse"><i class="fa-solid fa-shower"></i></button> Bañarse</a> </li>
-                                    <li><a class="dropdown-item" id="Aseo"><i class="fa-solid fa-hands-bubbles"></i> Hacer Aseo</a></li>
-                                    <li><a class="dropdown-item" id="medico"><i class="fa-solid fa-stethoscope"></i> Ir a medico</a></li>
-                                    <li><a class="dropdown-item" id="Trabajar"><i class="fa-solid fa-sack-dollar"></i> Trabajar</a></li>
-                                    <li><a class="dropdown-item" id="LavarRopa"><i class="fa-solid fa-shirt"></i> Lavar Ropa</a></li>
-                                    <li><a class="dropdown-item" id="Comer"><i class="fa-solid fa-utensils"></i> Comer</a></li>
-                                    <li><a class="dropdown-item" id="Tarea"><i class="fa-regular fa-file-word"></i> Hacer Tarea</a></li>
-                                    <li><a class="dropdown-item" id="Jugar"><i class="fa-solid fa-gamepad"></i> Jugar</a></li>
-                                    
+                                    <li><a class="dropdown-item" id="Ejercicio"><i
+                                                class="fa-solid fa-person-swimming"></i> Ejercicio</a></li>
+                                    <li><a class="dropdown-item" id="Bañarse"><i
+                                                class="fa-solid fa-shower"></i></button> Bañarse</a> </li>
+                                    <li><a class="dropdown-item" id="Aseo"><i class="fa-solid fa-hands-bubbles"></i>
+                                            Hacer Aseo</a></li>
+                                    <li><a class="dropdown-item" id="medico"><i class="fa-solid fa-stethoscope"></i> Ir
+                                            a medico</a></li>
+                                    <li><a class="dropdown-item" id="Trabajar"><i class="fa-solid fa-sack-dollar"></i>
+                                            Trabajar</a></li>
+                                    <li><a class="dropdown-item" id="LavarRopa"><i class="fa-solid fa-shirt"></i> Lavar
+                                            Ropa</a></li>
+                                    <li><a class="dropdown-item" id="Comer"><i class="fa-solid fa-utensils"></i>
+                                            Comer</a></li>
+                                    <li><a class="dropdown-item" id="Tarea"><i class="fa-regular fa-file-word"></i>
+                                            Hacer Tarea</a></li>
+                                    <li><a class="dropdown-item" id="Jugar"><i class="fa-solid fa-gamepad"></i>
+                                            Jugar</a></li>
+
                                 </ul>
                             </div>
                         </div>
@@ -91,7 +120,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" id="agregarActividad"data-bs-dismiss="modal">Agregar Actividad</button>
+                    <button type="button" class="btn btn-success" id="agregarActividad" data-bs-dismiss="modal">Agregar
+                        Actividad</button>
                 </div>
             </div>
         </div>
@@ -105,9 +135,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
-        <!-- jQuery Core 3.7.1 CDN -->
+    <!-- jQuery Core 3.7.1 CDN -->
     <script src="https://code.jquery.com/jquery-3.7.1.js"
-    integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="script.js"></script>
 </body>
 

@@ -1,0 +1,11 @@
+#reloj{
+    width: 4rem;
+    color: rgb(199, 57, 57);
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+#ciudad{
+    font-size: large;
+    font-weight: bold;
+}

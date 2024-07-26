@@ -13,10 +13,26 @@ $(document).ready(function () {
 });
 
 
+
+function creandoFecha() {
+    const fechaActual = new Date();
+    const dia = fechaActual.getDate();
+    const mes = fechaActual.getMonth() + 1;
+    const anio = fechaActual.getFullYear();
+    const hora = fechaActual.getHours();
+    const min = fechaActual.getMinutes();
+
+    let cambioValue = document.getElementById("reloj");
+    cambioValue.innerText = `${hora} : ${min}  `
+
+}
+setInterval(creandoFecha, 1000);
+
+
 myModal.addEventListener('shown.bs.modal', () => {
     // myInput.focus()
 })
-
+creandoFecha();
 let selectOption = '';
 
 let actividades = []
@@ -85,15 +101,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 })
 
-
 //al apretar boton agregar nueva actividad
 document.getElementById("agregarActividad").addEventListener('click', () => {
 
 
     let actividad = {};
     let hora = document.getElementById("hora").value;
+    let fecha = document.getElementById("fecha").value
 
+    let fechas = fecha.split("-")
+    fecha = `${fechas[2]}/${fechas[1]}/${fechas[0]}`
+    // console.log("🚀 ~ document.getElementById ~ fecha:", fecha)
+
+    actividad.fecha = fecha
     actividad.hora = hora
+
     actividad.nombre = nombre
     nombre = ''
     actividad.icono = tipo
@@ -104,11 +126,13 @@ document.getElementById("agregarActividad").addEventListener('click', () => {
     crearActividad(actividades)
 })
 
+
 function crearActividad(actividades) {
     let filaTabla = ''
     for (let i = 0; i < actividades.length; i++) {
         filaTabla += `
         <tr>
+            <td>${actividades[i].fecha}</td>
             <td>${actividades[i].hora}</td>
             <td style="width:10rem;">${actividades[i].nombre}</td>
             <td>${actividades[i].icono}</td>
@@ -140,7 +164,62 @@ document.getElementById("body").addEventListener('click', (event) => {
     }
 });
 
+// window.onload=creandoFecha;
 
 function guardarLS() {
     localStorage.setItem("actividades", JSON.stringify(actividades));
 }
+
+// ------------------------------------------------------------------------------
+const url = 'http://api.weatherapi.com/v1/current.json?key=6368cc77d3f7439181b05922242607&q=Valparaiso&aqi=no';
+const options = {
+    "Connection": "keep-alive",
+    "Vary": "Accept-Encoding",
+    "CDN-PullZone": "93447",
+    "CDN-Uid": "8fa3a04a-75d9-4707-8056-b7b33c8ac7fe",
+    "CDN-RequestCountryCode": "GB",
+    "Age": "0",
+    "x-weatherapi-qpm-left": "5000000",
+    "CDN-ProxyVer": "1.04",
+    "CDN-RequestPullSuccess": "True",
+    "CDN-RequestPullCode": "200",
+    "CDN-CachedAt": "07/26/2024 02:41:53",
+    "CDN-EdgeStorageId": "1049",
+    "CDN-Status": "200",
+    "CDN-RequestId": "f2325c5113421b683be69931ecd3aef8",
+    "CDN-Cache": "MISS",
+    "Accept-Ranges": "bytes",
+    "Content-Length": "781",
+    "Cache-Control": "public, max-age=180",
+    "Content-Type": "application/json",
+    "Date": "Fri, 26 Jul 2024 02:41:53 GMT",
+    "Server": "BunnyCDN-DE1-756",
+    "Via": "1.1 varnish (Varnish/6.0)"
+
+};
+
+fetch(url, options)
+    .then(res => res.json())
+    .then(response => {
+        crearClima(response)
+    })
+    .catch(err => console.error(err));
+
+function crearClima(response) {
+    let ciudad = '';
+    let clima = '';
+    let temperatura = '';
+
+    ciudad = response.location.name
+    temperatura = response.current.temp_c + "°C"
+    clima = response.current.condition.icon
+    let llenar = document.getElementById("ciudad")
+    llenar.innerText = `${ciudad}`;
+    let climaTemp = document.getElementById("clima")
+    
+    climaTemp.innerHTML = `${temperatura} <img src="${clima}" alt="">`;
+
+}
+setInterval(crearClima, 100000);
+
+// ------------------------------------------------------------------------------
