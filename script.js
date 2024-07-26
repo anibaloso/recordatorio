@@ -137,6 +137,7 @@ function crearActividad(actividades) {
             <td style="width:10rem;">${actividades[i].nombre}</td>
             <td>${actividades[i].icono}</td>
             <td class="ms-0">
+            <audio id="buttonSound" src="assets/sounds/logrado.mp3"></audio>
             <button class="btn btn-success eliminar" id="eliminar" data-index="${i}">Completada</button>
             </td>
         </tr>
@@ -144,6 +145,7 @@ function crearActividad(actividades) {
     }
     document.getElementById("body").innerHTML = filaTabla
 }
+
 
 document.getElementById("body").addEventListener('click', (event) => {
     if (event.target && event.target.classList.contains('eliminar')) {
@@ -155,14 +157,22 @@ document.getElementById("body").addEventListener('click', (event) => {
             // Eliminar la actividad del arreglo
             actividades.splice(numIndex, 1);
 
+
             // Actualizar el localStorage
             guardarLS();
 
             // Volver a crear la tabla con las actividades actualizadas
             crearActividad(actividades);
+
+            //agregar sonido de logrado
+            let audio = document.getElementById("buttonSound")
+            audio.play()
+
+
         }
     }
 });
+
 
 // window.onload=creandoFecha;
 
@@ -216,7 +226,7 @@ function crearClima(response) {
     let llenar = document.getElementById("ciudad")
     llenar.innerText = `${ciudad}`;
     let climaTemp = document.getElementById("clima")
-    
+
     climaTemp.innerHTML = `${temperatura} <img src="${clima}" alt="">`;
 
 }
