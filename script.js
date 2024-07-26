@@ -166,6 +166,7 @@ document.getElementById("body").addEventListener('click', (event) => {
 
             //agregar sonido de logrado
             let audio = document.getElementById("buttonSound")
+            audio.volume=0.2;
             audio.play()
 
 
