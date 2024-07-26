@@ -171,7 +171,7 @@ function guardarLS() {
 }
 
 // ------------------------------------------------------------------------------
-const url = 'http://api.weatherapi.com/v1/current.json?key=6368cc77d3f7439181b05922242607&q=Valparaiso&aqi=no';
+const url = 'https://api.weatherapi.com/v1/current.json?key=6368cc77d3f7439181b05922242607&q=Valparaiso&aqi=no';
 const options = {
     "Connection": "keep-alive",
     "Vary": "Accept-Encoding",
